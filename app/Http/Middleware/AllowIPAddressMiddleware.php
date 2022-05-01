@@ -22,8 +22,10 @@ class AllowIPAddressMiddleware
         if (
             // TODO: heroku doesn't support static ips, Need to implement a workaround
             ! $request->has('bypass_api')
-            || ! is_array($whitelistedIpAddresses)
-            || ! in_array($request->ip(), $whitelistedIpAddresses)
+            && (
+                ! is_array($whitelistedIpAddresses)
+                || ! in_array($request->ip(), $whitelistedIpAddresses)
+            )
         ) {
             return response()->json(['message' => "404 not found"]);
         }
