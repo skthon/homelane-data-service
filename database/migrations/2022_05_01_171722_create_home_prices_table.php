@@ -14,7 +14,7 @@ class CreateHomePricesTable extends Migration
     public function up()
     {
         Schema::create('home_prices', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->uuid('uuid')->unique()->comment('Globally unique identifier for home prices');
             $table->timestamp('date')->nullable();
             $table->float('price', 5, 2)->nullable()->default(null)->index('price');
