@@ -22,7 +22,6 @@ class HomePriceSeeder extends Seeder
             return $this->command->info("Data.csv doesn't exists");
         }
 
-        HomePrice::truncate();
         // Get a resource to read the file and read out the first line
         $stream = Storage::disk('home_prices')->readStream('data.csv');
         $csvHeaders = fgetcsv($stream, 4096);
