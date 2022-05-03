@@ -19,7 +19,7 @@ class HomePriceDataRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
-            response()->json($validator->errors()->first(), 422)
+            response()->json(["error" => $validator->errors()->first()], 422)
         );
     }
 
@@ -31,10 +31,10 @@ class HomePriceDataRequest extends FormRequest
     public function rules()
     {
         return [
-            'max_price'           => 'integer|gt:min_price',
-            'min_price'           => 'integer|lt:max_price',
-            'min_sqft_living'     => 'integer',
-            'min_year'            => 'integer',
+            'max_price'           => 'numeric|gt:min_price',
+            'min_price'           => 'numeric|lt:max_price',
+            'min_sqft_living'     => 'numeric',
+            'min_year'            => 'numeric',
         ];
     }
 
